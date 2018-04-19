@@ -121,4 +121,25 @@ public class MemberDAO {
 		}
 		return member;
 	}
+	public int updateMember(MemDTO member) {
+		int n=0;
+		StringBuffer sql = new StringBuffer();
+		sql.append("update member set passwd=?, name=?,phone=? where id = ?");
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, member.getPasswd());
+			pstmt.setString(2, member.getName());
+			pstmt.setString(3, member.getPhone());
+			pstmt.setString(4, member.getId());
+
+			n = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+": int updateMember(MemDTO member)");
+		} finally {
+			DataBaseUtil.close(conn, pstmt, rs);
+		}
+		return n;
+	}
 }

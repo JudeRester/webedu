@@ -21,3 +21,17 @@
 		}
 		document.join_frm.submit();
 	}
+	
+	function updateInfo(){
+		if(document.modify_frm.passwd.value.length ==0){
+			window.alert("패스워드를 입력해 주세요");
+			join_frm.passwd.focus();
+			return;
+		}
+		if(document.modify_frm.passwd.value != document.modify_frm.passwd_chk.value){
+			window.alert("패스워드가 일치하지 않습니다.");
+			document.modify_frm.passwd.focus();
+			return;
+		}
+		document.modify_frm.submit();
+	}
