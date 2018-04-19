@@ -67,4 +67,58 @@ public class MemberDAO {
 		
 		return sqlresult;
 	}
+	public SqlResult memberCheck(String id, String pw) {
+		int n = 0;
+		SqlResult sqlresult = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select passwd from member where id = ?");
+		try {
+			conn = DataBaseUtil.getConnection();
+
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(pw.equals(rs.getString("passwd"))) {
+					sqlresult = SqlResult.MEM_LOGIN_SUCCESS;
+				}else {
+					sqlresult = SqlResult.MEM_LOGIN_PW_NOT;
+				}
+			}else {
+				sqlresult = SqlResult.MEM_LOGIN_FAILED;
+			}
+		} catch (SQLException e) {
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+": SqlResult memberCheck(String id, String pw)");
+		} finally {
+			DataBaseUtil.close(conn, pstmt, rs);
+		}
+		return sqlresult;
+	}
+	public MemDTO getMember(String id) {
+		MemDTO member = null;
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("select id, passwd, name, birth,phone from member where id = ?");
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member = new MemDTO();
+				member.setId(rs.getString("id"));
+				member.setPasswd("passwd");
+				member.setName(rs.getString("name"));
+				member.setBirth(rs.getString("birth"));
+				member.setPhone(rs.getString("phone"));
+			}
+		}catch(SQLException e) {
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+": MemDTO getMember(String id)");
+		} finally {
+			DataBaseUtil.close(conn, pstmt, rs);
+		}
+		return member;
+	}
 }
