@@ -18,6 +18,8 @@ public class AdmDTO {
 		this.email = email;
 		this.grade = grade;
 	}
+	public AdmDTO() {
+	}
 	public String getId() {
 		return id;
 	}
