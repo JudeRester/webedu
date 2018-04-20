@@ -38,7 +38,7 @@
 		session.setAttribute("id", mdto.getId());
 		session.setAttribute("grade", mdto.getGrade());
 		session.setAttribute("chkMember", "OK");
-		response.sendRedirect("main.jsp");
+		response.sendRedirect("admin.jsp");
 	}
 		
 %>

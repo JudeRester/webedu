@@ -15,7 +15,7 @@
 <body>
 
 <%
-	MemberDAO mdao = new MemberDAO();
+	MemberDAO mdao = MemberDAO.getInstance();
 	int n = mdao.deleteMember(id);
 	
 	if(n==1){

@@ -7,11 +7,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MemberDAO {
+	
+	public static MemberDAO mdao = new MemberDAO();
+	
 	Connection conn;
 	Statement stmt;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	public MemberDAO() {
+	private MemberDAO() {
+	}
+	public static MemberDAO getInstance(){
+		return mdao;
 	}
 	public SqlResult insertMember(MemDTO member) {
 		int cnt = 0;

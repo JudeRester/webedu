@@ -4,7 +4,7 @@
     <%
     if(session.getAttribute("chkMember")!=null){
    	 	%>
-    	<jsp:forward page="main.jsp" />
+    	<jsp:forward page="admin.jsp" />
     	
     	<%
     	}

@@ -14,7 +14,7 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("passwd");
 	
-	MemberDAO mdao = new MemberDAO();
+	MemberDAO mdao = MemberDAO.getInstance();
 	SqlResult sqlresult = mdao.memberCheck(id,pw);
 	if(sqlresult == SqlResult.MEM_LOGIN_FAILED){
 		//아이디 x

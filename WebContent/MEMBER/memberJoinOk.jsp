@@ -27,7 +27,7 @@
 
 
 <%
-	MemberDAO mdao = new MemberDAO();
+	MemberDAO mdao = MemberDAO.getInstance();
 	
 	SqlResult sqlresult = mdao.checkId(mdto.getId());
 	if(sqlresult == SqlResult.MEM_EXIST){

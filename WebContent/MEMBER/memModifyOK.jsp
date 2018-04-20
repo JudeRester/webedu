@@ -30,7 +30,7 @@
 
 
 <%
-	MemberDAO mdao = new MemberDAO();
+	MemberDAO mdao = MemberDAO.getInstance();
 	mdto.setId(id);
 	int n = mdao.updateMember(mdto);
 	
