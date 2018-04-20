@@ -20,12 +20,12 @@
 <hr />
 <h2>로그인</h2>
 <hr />
-<form action="/webedu/MEMBER/memLoginOK.jsp" method="post">
+<form action="/webedu/ADMIN/admLoginOK.jsp" method="post">
 
 아이디 : <input type="text" name="id" /><br>
 비밀번호 : <input type="password" name="passwd" /><br>
 <input type="submit" value="로그인" />
-<input type="button" value="회원가입" onClick="javascript:window.location='/webedu/MEMBER/memjoin.jsp'"/>
+<input type="button" value="회원가입" onClick="javascript:window.location='/webedu/ADMIN/memjoin.jsp'"/>
 
 </form>
 

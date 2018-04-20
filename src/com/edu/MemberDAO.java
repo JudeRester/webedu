@@ -138,7 +138,25 @@ public class MemberDAO {
 		}catch(SQLException e) {
 			DataBaseUtil.printSQLException(e, this.getClass().getName()+": int updateMember(MemDTO member)");
 		} finally {
-			DataBaseUtil.close(conn, pstmt, rs);
+			DataBaseUtil.close(conn, pstmt);
+		}
+		return n;
+	}
+	
+	public int deleteMember(String id) {
+		int n = 0;
+		StringBuffer sql = new StringBuffer();
+		sql.append("delete from member where id = ?");
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+			n=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+": int deleteMember(String id)");
+		}finally {
+			DataBaseUtil.close(conn, pstmt);
 		}
 		return n;
 	}

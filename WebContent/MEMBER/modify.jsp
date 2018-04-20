@@ -39,6 +39,7 @@
 		</select>일<br>
 휴대전화 : <input type="tel" name="phone" value="<%=mdto.getPhone() %>" /><br>
 <input type="button" value="수정" onClick="updateInfo()"/><input type="reset" value="취소" />
+<input type="button" value="탈퇴" onClick="javascript:location.href='memDelete.jsp'" />
 </form>
 </body>
 </html>
