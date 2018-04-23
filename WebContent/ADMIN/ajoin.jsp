@@ -6,14 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
 <script src="/webedu/public/jquery/jquery-3.3.1.js"></script>
-<script src="js/member.js"></script>
+<script src="js/admin.js"></script>
 </head>
 <body>
 
 <hr width=500 size=1>
 <h2>회원가입</h2>
 <hr width=500 size=1>
-<form action="memberJoinOk.jsp" method="post" name="join_frm">
+<form action="aJoinOk.jsp" method="post" name="join_frm">
 아이디 : <input type="email" name="id" id='id'/><br>
 비밀번호 : <input type="password" name="passwd" id='passwd' /><br>
 비밀번호 확인 : <input type="password" name="passwd_chk" id='passwd_chk' /><br>
