@@ -1,6 +1,6 @@
 $(function(){
 //   $("#memJoin").click(function(){
-   $("input[value='회원가입']").click(function(){
+   $("input[value='관리자등록']").click(function(){
       if($("#id").val()==""){
          alert("아이디를 입력하세요!");
          $("#id").focus();
