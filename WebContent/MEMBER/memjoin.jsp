@@ -24,14 +24,14 @@
 			<option value="2002">2002</option>
 			</select>년
 		<select name="month" id="">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
+			<option value="01">1</option>
+			<option value="02">2</option>
+			<option value="03">3</option>
 		</select>월
 		<select name="day" id="">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
+			<option value="01">1</option>
+			<option value="02">2</option>
+			<option value="03">3</option>
 		</select>일<br>
 휴대전화 : <input type="tel" name="phone" id=phone /><br>
 <input type="button" value="회원가입" <%--onClick="mem_check()"--%>/><input type="reset" value="취소" />
