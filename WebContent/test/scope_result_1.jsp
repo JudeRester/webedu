@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<jsp:useBean id="cnt" class="com.edu.CountBean" scope="page"/>
+<jsp:useBean id="cnt" class="com.edu.CountBean" scope="page"/>
 <!DOCTYPE html>
 <html>
 <head>
