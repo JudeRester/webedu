@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.edu.bbs.cmd.BCommand;
+import com.edu.bbs.cmd.BbsListCmd;
+import com.edu.bbs.cmd.BbsWriteCmd;
 /**
  * Servlet implementation class FrontController
  */
-@WebServlet("/FrontController")
+@WebServlet("*.do")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -22,23 +24,22 @@ public class FrontController extends HttpServlet {
      */
     public FrontController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("doGet호출");
+		actionDo(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		System.out.println("doPost호출");
+		actionDo(request, response);
 	}
 	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("actionDo 호출!");
@@ -57,24 +58,27 @@ public class FrontController extends HttpServlet {
 		//글쓰기 이름
 			case "/bbs/write_view.do" :
 				viewPage = "/bbs/write_form.jsp";
-				
+				System.out.println("1");
 				break;
 		//글쓰기 등록
 			case "/bbs/write.do" :
 				command = new BbsWriteCmd();
 				command.execute(request, response);
-				viewPage = "list.do";
+				viewPage = "/bbs/list.do";
+				System.out.println("2");
 				break;
-			case "bbs/list.do" :
+			case "/bbs/list.do" :
 				command = new BbsListCmd();
 				command.execute(request, response);
 				viewPage = "/bbs/list.jsp";
+				System.out.println("3");
 				break;
 			default :
 				break;
 		}
-
+		System.out.println("4");
 		RequestDispatcher dispat = request.getRequestDispatcher(viewPage);
 		dispat.forward(request, response);
 	}
+	
 }

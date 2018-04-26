@@ -25,4 +25,12 @@
     <param-name>key_3</param-name>
     <param-value>value_3</param-value>
   </context-param>
+  <servlet>
+  	<servlet-name>Frontcontroller</servlet-name>
+  	<servlet-class>Frontcontroller</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Frontcontroller</servlet-name>
+  	<url-pattern>/Frontcontroller</url-pattern>
+  </servlet-mapping>
 </web-app>

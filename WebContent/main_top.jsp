@@ -35,7 +35,7 @@
 	<td><a href="/webedu/index.jsp">홈</a></td>
 	<td><a href="/webedu/MEMBER/login.jsp" target="iframe_content">로그인</a></td>
 	<td><a href="/webedu/MEMBER/memjoin.jsp" target="iframe_content">회원가입</a></td>
-	<td></td>
+	<td><a href="/webedu/bbs/write_view.do" target="iframe_content">게시글작성</a></td>
 	<td></td>
 	<td></td>
 </table>

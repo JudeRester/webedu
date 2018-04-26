@@ -13,7 +13,7 @@
 #fof p{display:block; margin:0 0 25px 0; padding:0; font-size:16px;}
 #fof #respond input{width:200px; padding:5px; border:1px solid #CCCCCC;}
 #fof #respond #submit{width:auto;}
-#fof{display:block; position:relative; width:960px; height:578px; background:url("../images/404.png") no-repeat fixed center; }
+#fof{display:block; position:relative; width:960px; height:578px; background:url("../images/404.png") no-repeat; }
 </style>
 <title>Insert title here</title>
 </head>

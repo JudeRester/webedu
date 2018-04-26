@@ -8,28 +8,23 @@
   <link rel="stylesheet" href="/webedu/bootstrap/dist/css/bootstrap.css">
   <script src="public/jquery/jquery-3.3.1.min.js"></script>
   <script src="/bootstrap/dist/css/bootstrap.js"></script>
-  <style>
-  #contentstext{
-	width:70%;
-	}
-	</style>
 <title>Insert title here</title>
 
 </head>
 <body>
 <table class="table table-hover">
-	<form action="write.do">
+	<form action="/webedu/bbs/write.do">
 		<tr>
 			<th scope="col" class="w-25 p-3">제목</th>
-			<td scope="col"><input type="text" class="form-control" id="" placeholder="insert title"/></td>
+			<td scope="col"><input type="text" name="bTitle" class="form-control" id="" placeholder="insert title"/></td>
 		</tr>
 		<tr>
 			<th scope="col">작성자</th>
-			<td scope="col"><input type="text" class="form-control" id="" placeholder="insert your name"/></td>
+			<td scope="col"><input type="text" name="bName" class="form-control" id="" placeholder="insert your name"/></td>
 		</tr>
 		<tr>
 			<th scope="col">내용</th>
-			<td scope="col"><textarea rows="4" cols="50" id="contentstext" > 
+			<td scope="col"><textarea name="bContent" rows="4" cols="50" id="" > 
 </textarea></td>
 		</tr>
 		<tr>
