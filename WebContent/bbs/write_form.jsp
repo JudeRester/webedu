@@ -24,12 +24,12 @@
 		</tr>
 		<tr>
 			<th scope="col">내용</th>
-			<td scope="col"><textarea name="bContent" rows="4" cols="50" id="" ></textarea></td>
+			<td scope="col"><textarea class="form-control" name="bContent" id="" ></textarea></td>
 		</tr>
 		<tr>
 			<td colspan=2>
 			<input type="submit" class="btn btn-primary" value="등록" />
-		 	<a href="list.do" class="btn btn-primary" role="button" aria-pressed="true"> 목록으로</a>
+		 	<a href="list.do" class="btn btn-primary" role="button" aria-pressed="true" aria-describedby="inputGroup-sizing-sm"> 목록으로</a>
 		</tr>
 	</form>
 </table>

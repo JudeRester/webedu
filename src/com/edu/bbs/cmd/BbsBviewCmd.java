@@ -15,13 +15,6 @@ public class BbsBviewCmd implements BCommand {
 		BbsDAO bbsdao = BbsDAO.getInstance();
 		BbsDTO bdto = bbsdao.view(a);
 		request.setAttribute("bdto", bdto);
-		request.setAttribute("a", bdto.getbNum());
-		request.setAttribute("a1", bdto.getbTitle());
-		request.setAttribute("a2", bdto.getbName());
-		request.setAttribute("a3", bdto.getbCDate());
-		request.setAttribute("a4", bdto.getbUDate());
-		request.setAttribute("a5", bdto.getbHit());
-		request.setAttribute("a6", bdto.getbContent());
 	}
 
 }

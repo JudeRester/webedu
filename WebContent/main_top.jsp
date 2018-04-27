@@ -12,6 +12,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/webedu/bootstrap/dist/css/bootstrap.css">
+  <script src="public/jquery/jquery-3.3.1.min.js"></script>
+  <script src="/bootstrap/dist/css/bootstrap.js"></script>
   <title>Document</title>
     <style>
     *{ margin:0;text-align:center;}
@@ -30,8 +33,8 @@
 </head>
 <body>
 <header id="header1">&lt;header&gt;</header>
-<nav id="nav1">
-<table>
+<nav id="nav1" class="navbar navbar-light bg-light">
+<table class="table">
 	<td><a href="/webedu/index.jsp">홈</a></td>
 	<td><a href="/webedu/MEMBER/login.jsp" target="iframe_content">로그인</a></td>
 	<td><a href="/webedu/MEMBER/memjoin.jsp" target="iframe_content">회원가입</a></td>
@@ -39,6 +42,10 @@
 	<td></td>
 	<td></td>
 </table>
+<!-- <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form> -->
 </nav>
 
 </body>

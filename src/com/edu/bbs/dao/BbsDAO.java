@@ -107,7 +107,6 @@ public class BbsDAO {
 		    DBMS_OUTPUT.PUT_LINE('ERRMSG : ' || r_errmsg);
 		END Clist_callbbs;*/
 	public BbsDTO view(int bNum) {
-		System.out.println(bNum);
 		BbsDTO bbsdto = null;
 		String sql2 = "update BBS SET BHIT=(BHIT+1) where BNUM = ?";
 		String sql = "select BNUM, BTITLE, BNAME, BCDATE, BUDATE, BHIT, BCONTENT FROM bbs where bnum = ?";
@@ -133,10 +132,8 @@ public class BbsDAO {
 		} catch (SQLException e) {
 			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO view(int bNum)");
 	      } finally {
-	    	  System.out.println(3);
 	         DataBaseUtil.close(conn, pstmt, rs);
 	      }
-	      System.out.println("1");
 		return bbsdto;
 	}
 }
