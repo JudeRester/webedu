@@ -1,5 +1,6 @@
 package com.edu.bbs.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ public class BbsDAO {
 	Statement stmt;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	
+	CallableStatement cs;
 	private BbsDAO() {}
 	
 	public static BbsDAO getInstance() {
@@ -77,10 +78,65 @@ public class BbsDAO {
 		}
 		return alist;
 	}
+	/*create or replace procedure  Clist_callbbs (
+		    PNUM IN OUT bbs.bnum%TYPE,
+		    OTITLE OUT bbs.btitle%TYPE,
+		    ONAME OUT bbs.bname%TYPE,
+		    OCDATE OUT bbs.bcdate%TYPE,
+		    OUDATE OUT bbs.budate%TYPE,
+		    OHIT OUT bbs.bhit%TYPE,
+		    OCONTENT OUT bbs.bcontent%TYPE,
+		    
+		    r_errcode OUT NUMBER,
+		    r_errmsg OUT VARCHAR2)
+		IS BEGIN
+		        update BBS 
+		        SET BHIT=(BHIT+1) where BNUM = PNUM;
+		        select BNUM, BTITLE, BNAME, BCDATE, BUDATE, BHIT, BCONTENT
+		        INTO PNUM, OTITLE, ONAME, OCDATE, OUDATE, OHIT, OCONTENT
+		        FROM bbs
+		        where bnum = pnum;
+		        
+
+		Exception 
+		    WHEN OTHERS THEN
+		    ROLLBACK;
+		    r_errcode := SQLCODE;
+		    r_errmsg := SQLERRM;
+		    DBMS_OUTPUT.PUT_LINE('ERRCODE : ' || to_char(r_errcode));
+		    DBMS_OUTPUT.PUT_LINE('ERRMSG : ' || r_errmsg);
+		END Clist_callbbs;*/
 	public BbsDTO view(int bNum) {
-		BbsDTO bbsdto = new BbsDTO();
-		StringBuffer sql = new StringBuffer();
-		sql.append("");
+		System.out.println(bNum);
+		BbsDTO bbsdto = null;
+		String sql2 = "update BBS SET BHIT=(BHIT+1) where BNUM = ?";
+		String sql = "select BNUM, BTITLE, BNAME, BCDATE, BUDATE, BHIT, BCONTENT FROM bbs where bnum = ?";
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1,bNum);
+			pstmt.executeUpdate();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				bbsdto = new BbsDTO();
+				bbsdto.setbNum(rs.getInt("bNum"));
+				bbsdto.setbTitle(rs.getString("bTitle"));
+				bbsdto.setbName(rs.getString("bName"));
+				bbsdto.setbCDate(rs.getDate("bCdate"));
+				bbsdto.setbUDate(rs.getDate("bUdate"));
+				bbsdto.setbHit(rs.getInt("bHit"));
+				bbsdto.setbContent(rs.getString("bContent"));
+			}
+		
+		} catch (SQLException e) {
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO view(int bNum)");
+	      } finally {
+	    	  System.out.println(3);
+	         DataBaseUtil.close(conn, pstmt, rs);
+	      }
+	      System.out.println("1");
 		return bbsdto;
 	}
 }

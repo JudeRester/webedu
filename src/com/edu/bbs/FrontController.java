@@ -59,20 +59,17 @@ public class FrontController extends HttpServlet {
 		//글쓰기 이름
 			case "/bbs/write_view.do" :
 				viewPage = "/bbs/write_form.jsp";
-				System.out.println("1");
 				break;
 		//글쓰기 등록
 			case "/bbs/write.do" :
 				command = new BbsWriteCmd();
 				command.execute(request, response);
 				viewPage = "/bbs/list.do";
-				System.out.println("2");
 				break;
 			case "/bbs/list.do" :
 				command = new BbsListCmd();
 				command.execute(request, response);
 				viewPage = "/bbs/list.jsp";
-				System.out.println("3");
 				break;
 			case "/bbs/view.do" :
 				command = new BbsBviewCmd();
@@ -82,7 +79,6 @@ public class FrontController extends HttpServlet {
 			default :
 				break;
 		}
-		System.out.println("4");
 		RequestDispatcher dispat = request.getRequestDispatcher(viewPage);
 		dispat.forward(request, response);
 	}

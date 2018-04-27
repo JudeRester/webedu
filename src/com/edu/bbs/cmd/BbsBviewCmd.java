@@ -1,6 +1,5 @@
 package com.edu.bbs.cmd;
 
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,16 +11,17 @@ public class BbsBviewCmd implements BCommand {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		BbsDTO bbsdto = new BbsDTO();
-		
-		bbsdto.setbTitle(request.getParameter("bTitle"));
-		bbsdto.setbName(request.getParameter("bName"));
-		bbsdto.setbContent(request.getParameter("bContent"));
-		
+		int a = Integer.parseInt(request.getParameter("bNum"));
 		BbsDAO bbsdao = BbsDAO.getInstance();
-		bbsdao.view(bbsdto);
-		
-		request.setAttribute("content", bbsdto);
+		BbsDTO bdto = bbsdao.view(a);
+		request.setAttribute("bdto", bdto);
+		request.setAttribute("a", bdto.getbNum());
+		request.setAttribute("a1", bdto.getbTitle());
+		request.setAttribute("a2", bdto.getbName());
+		request.setAttribute("a3", bdto.getbCDate());
+		request.setAttribute("a4", bdto.getbUDate());
+		request.setAttribute("a5", bdto.getbHit());
+		request.setAttribute("a6", bdto.getbContent());
 	}
 
 }
