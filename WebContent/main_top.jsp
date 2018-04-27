@@ -5,10 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-<html lang="ko">
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -20,7 +16,25 @@
     *{ margin:0;text-align:center;}
     html, body{height: 100%;margin:0;padding: 0}
     #header1 {background: rgb(5,213,245); height: 10%}
-    #nav1{background-color: rgb(189,142,108); height: 10%}
+    .nav1{background-color: #333; height: 10%; overflow: hidden;}
+    .nav1 a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+    padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.nav1 a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav1 a.active {
+  background-color: #4CAF50;
+  color: white;
+}
     #section1{background-color: rgb(148,29,196); height: 30%; width: 70%; float: left;}
     #section2{background-color: rgb(244,229,33); width: 70%; height: 40%;float: left;}
     #article1{background-color: rgb(207,63,18); width: 30%;height: 30%; float: right;}
@@ -33,16 +47,12 @@
 </head>
 <body>
 <header id="header1">&lt;header&gt;</header>
-<nav id="nav1" class="navbar navbar-light bg-light">
-<table class="table">
-	<td><a href="/webedu/index.jsp">홈</a></td>
-	<td><a href="/webedu/MEMBER/login.jsp" target="iframe_content">로그인</a></td>
-	<td><a href="/webedu/MEMBER/memjoin.jsp" target="iframe_content">회원가입</a></td>
-	<td><a href="/webedu/bbs/write_view.do" target="iframe_content">게시글작성</a></td>
-	<td></td>
-	<td></td>
-</table>
-<!-- <form class="form-inline">
+<nav class="nav1">
+	<a href="/webedu/index.jsp">홈</a>
+	<a href="/webedu/MEMBER/login.jsp" target="iframe_content">로그인</a>
+	<a href="/webedu/MEMBER/memjoin.jsp" target="iframe_content">회원가입</a>
+	<a href="/webedu/bbs/list.do" target="iframe_content">게시판</a>
+	<!-- <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form> -->

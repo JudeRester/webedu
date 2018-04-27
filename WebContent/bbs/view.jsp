@@ -15,25 +15,26 @@
 </head>
 <body>
 <div style= "border: 1px solid #ced4da; border-radius: 0.25rem;
-		margin:10px; padding:10px; width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;">
+		width: 97%;
+  padding-up: 20px;
+  padding-down: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 10px;">
 <br />
-  <h2>${bdto.getbTitle() }</h2>
-  <p align="right" class="media-right">작성일 : ${bdto.getbCDate() }</p>
-  <p align="right" class="media-right">최종수정일 : ${bdto.getbUDate() }</p>
+	<div class="media">
+  <h2 class="media-heading">${bdto.getbTitle() }</h2><br>
+  <p class="media-body"></p>
+  <p align="right" class="media-right">작성일 : ${bdto.getbCDate() }<br>최종수정일 : ${bdto.getbUDate() }
+  			<br>조회수 : ${bdto.getbHit() }</p>
+  </div>
   <hr />
   <div class="media">
     <div class="media-body">
-    
-    
-    <p align="right" class="media-body">조회수 : ${bdto.getbHit() }</p>
-	${bdto.getbNum() }<br>
-	${bdto.getbName() }<br>
+    <p align="left">작성자 :${bdto.getbName() }</p>
+    <div>
 	${bdto.getbContent() }<br>
-
+	</div>
 	</div>
 </div>
 </body>
