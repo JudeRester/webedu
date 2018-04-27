@@ -52,8 +52,9 @@ public class BbsDAO {
 		ArrayList<BbsDTO> alist = new ArrayList<>();
 		StringBuffer str = new StringBuffer();
 		BbsDTO bbsdto = null;
-		str.append("select bnum, btitle, bname, bhit, bcontent from bbs");
-		
+		str.append("select bnum, btitle, bname, bhit, bcontent from bbs")
+		.append(" order by bnum desc");
+		System.out.println("1");
 		
 		try {
 			conn = DataBaseUtil.getConnection();
@@ -75,5 +76,11 @@ public class BbsDAO {
 			DataBaseUtil.close(conn, pstmt, rs);
 		}
 		return alist;
+	}
+	public BbsDTO view(int bNum) {
+		BbsDTO bbsdto = new BbsDTO();
+		StringBuffer sql = new StringBuffer();
+		sql.append("");
+		return bbsdto;
 	}
 }

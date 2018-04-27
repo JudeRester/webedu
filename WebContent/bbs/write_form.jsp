@@ -24,8 +24,7 @@
 		</tr>
 		<tr>
 			<th scope="col">내용</th>
-			<td scope="col"><textarea name="bContent" rows="4" cols="50" id="" > 
-</textarea></td>
+			<td scope="col"><textarea name="bContent" rows="4" cols="50" id="" ></textarea></td>
 		</tr>
 		<tr>
 			<td colspan=2>

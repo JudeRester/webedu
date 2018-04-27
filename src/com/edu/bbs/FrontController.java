@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.edu.bbs.cmd.BCommand;
+import com.edu.bbs.cmd.BbsBviewCmd;
 import com.edu.bbs.cmd.BbsListCmd;
 import com.edu.bbs.cmd.BbsWriteCmd;
 /**
@@ -73,6 +74,11 @@ public class FrontController extends HttpServlet {
 				viewPage = "/bbs/list.jsp";
 				System.out.println("3");
 				break;
+			case "/bbs/view.do" :
+				command = new BbsBviewCmd();
+				command.execute(request, response);
+				viewPage = "/bbs/view.jsp";
+				break;	
 			default :
 				break;
 		}

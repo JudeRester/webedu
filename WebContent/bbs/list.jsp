@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,32 +17,29 @@
 </head>
 <body>
 	<div class="container">
-  <h2>Basic Table</h2>
-  <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>            
-  <table class="table table-hover">
-    <thead>
+	  <table class="table table-hover">
+   		 <thead class ="thead-light">
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th scope="col">글번호</th>
+        <th scope="col">제목</th>
+        <th scope="col">작성자</th>
+        <th scope="col">조회수</th>
       </tr>
     </thead>
     <tbody>
+   		<c:forEach items="${list }" var="dto">
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+      	<th scope="row">${dto.bNum }</th>
+        <td><a href="">${dto.bTitle }</a></td>
+        <td>${dto.bName }</td>
+        <td>${dto.bHit }</td>
       </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+      </c:forEach>
+     	<tr>
+     		<td colspan="5" align="right">
+     		<a href="write_view.do" class="btn btn-primary" role="button" aria-pressed="true">글쓰기</a>
+     		</td>
+     	</tr>
     </tbody>
   </table>
 </div>
