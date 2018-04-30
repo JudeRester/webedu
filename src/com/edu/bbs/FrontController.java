@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.edu.bbs.cmd.BCommand;
 import com.edu.bbs.cmd.BbsBviewCmd;
 import com.edu.bbs.cmd.BbsListCmd;
+import com.edu.bbs.cmd.BbsModifyCmd;
+import com.edu.bbs.cmd.BbsModifyacCmd;
 import com.edu.bbs.cmd.BbsWriteCmd;
 /**
  * Servlet implementation class FrontController
@@ -76,6 +78,16 @@ public class FrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "/bbs/view.jsp";
 				break;	
+			case "/bbs/modify.do" :
+				command = new BbsModifyCmd();
+				command.execute(request, response);
+				viewPage = "/bbs/modify_form.jsp";
+				break;
+			case "/bbs/modify_ac.do" :
+				command = new BbsModifyacCmd();
+				command.execute(request, response);
+				viewPage = "/bbs/list.jsp";
+				break;
 			default :
 				break;
 		}

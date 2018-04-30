@@ -55,8 +55,6 @@ public class BbsDAO {
 		BbsDTO bbsdto = null;
 		str.append("select bnum, btitle, bname, bhit, bcontent from bbs")
 		.append(" order by bnum desc");
-		System.out.println("1");
-		
 		try {
 			conn = DataBaseUtil.getConnection();
 			pstmt = conn.prepareStatement(str.toString());
@@ -135,5 +133,43 @@ public class BbsDAO {
 	         DataBaseUtil.close(conn, pstmt, rs);
 	      }
 		return bbsdto;
+	}
+	public BbsDTO modify(int num) {
+		BbsDTO bdto = null;
+		String sql = "select BNUM, BTITLE, BNAME, BCONTENT FROM bbs where bnum = ?";
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bdto = new BbsDTO();
+				bdto.setbNum(rs.getInt("bNum"));
+				bdto.setbTitle(rs.getString("bTitle"));
+				bdto.setbName(rs.getString("bName"));
+				bdto.setbContent(rs.getString("bContent"));
+			}
+		}catch(SQLException e) {
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO modify(int num)");
+		}finally {
+	         DataBaseUtil.close(conn, pstmt, rs);
+	      }
+		return bdto;
+	}
+	public BbsDTO modify_ac(BbsDTO bdto) {
+		String sql = "update BBS SET btitle=?, bname=?, bcontent=? where BNUM = ?";
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, bdto.getbTitle());
+			pstmt.setString(2, bdto.getbName());
+			pstmt.setString(3, bdto.getbContent());
+			pstmt.setInt(4, bdto.getbNum());
+		}catch(SQLException e) {
+			
+		}finally {
+			
+		}
+		return bdto;
 	}
 }
