@@ -133,7 +133,6 @@ public class BbsDAO {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				bbsdto.setpPage(rs.getInt("bNum"));
-				System.out.println(bbsdto.getpPage());
 			}else {
 				bbsdto.setpPage(bbsdto.getbNum());
 			}
@@ -142,7 +141,6 @@ public class BbsDAO {
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				bbsdto.setnPage(rs.getInt("bNum"));
-				System.out.println(bbsdto.getnPage());
 			}else {
 				bbsdto.setnPage(bbsdto.getbNum());
 			}
@@ -176,7 +174,7 @@ public class BbsDAO {
 		return bdto;
 	}
 	public int modify_ac(BbsDTO bdto) {
-		String sql = "update BBS SET btitle=?, bname=?, bcontent=? where BNUM = ?";
+		String sql = "update BBS SET btitle=?, bname=?, bcontent=?, BUDATE=sysdate where BNUM = ?";
 		int cnt = 0;
 		try {
 			conn=DataBaseUtil.getConnection();
@@ -189,6 +187,21 @@ public class BbsDAO {
 			cnt = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO modify_ac(BbsDTO bdto)");
+		}finally {
+			DataBaseUtil.close(conn, pstmt);
+		}
+		return cnt;
+	}
+	public int delete(int bNum) {
+		int cnt = 0;
+		String sql = "delete from bbs where bNum=?";
+		try {
+			conn = DataBaseUtil.getConnection();
+			pstmt =conn.prepareStatement(sql);
+			pstmt.setInt(1, bNum);
+			cnt = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+"int delete(int bNum)");
 		}finally {
 			DataBaseUtil.close(conn, pstmt);
 		}

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.edu.bbs.cmd.BCommand;
 import com.edu.bbs.cmd.BbsBviewCmd;
+import com.edu.bbs.cmd.BbsDeleteCmd;
 import com.edu.bbs.cmd.BbsListCmd;
 import com.edu.bbs.cmd.BbsModifyCmd;
 import com.edu.bbs.cmd.BbsModifyacCmd;
@@ -88,6 +89,10 @@ public class FrontController extends HttpServlet {
 				command.execute(request, response);
 				viewPage = "/bbs/list.do";
 				break;
+			case "/bbs/delete.do" :
+				command = new BbsDeleteCmd();
+				command.execute(request, response);
+				viewPage = "/bbs/list.do";
 			default :
 				break;
 		}

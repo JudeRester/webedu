@@ -26,7 +26,7 @@
 	  <h2 class="media-heading">${bdto.getbTitle() }</h2><br>
 	  <p class="media-body"></p>
 	  <p align="right" class="media-right">작성일 : ${bdto.getbCDate() }<br>최종수정일 : ${bdto.getbUDate() }
-	  			<br>조회수 : ${bdto.getbHit() }</p>
+	  <br>조회수 : ${bdto.getbHit() }</p>
 	  </div>
 	  <hr style="margin:0px;padding-up:0px; padding-down:0px;" />
 	  <div class="media">
@@ -45,8 +45,11 @@
 	<tr>
 		<td colspan=2 align="right">
 		<a href="modify.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true">수정</a>
+		<a href="delete.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true">삭제</a>
+		<a href="reply.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true">답글</a>
 	 	<a href="list.do" class="btn btn-primary" role="button" aria-pressed="true" aria-describedby="inputGroup-sizing-sm"> 목록으로</a>
-	 	<a class="btn btn-primary" role="button" aria-pressed="true" href="view.do?bNum=${bdto.getpPage() }">Previous</a></li>
+	 	<a class="btn btn-primary" role="button" aria-pressed="true" href="view.do?bNum=${bdto.getpPage() }">◀</a>
+	 	<a class="btn btn-primary" role="button" aria-pressed="true" href="view.do?bNum=${bdto.getnPage() }">▶</a>
 	 	</td>
 	</tr>
 	</table>
