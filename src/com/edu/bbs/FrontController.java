@@ -86,7 +86,7 @@ public class FrontController extends HttpServlet {
 			case "/bbs/modify_ac.do" :
 				command = new BbsModifyacCmd();
 				command.execute(request, response);
-				viewPage = "/bbs/list.jsp";
+				viewPage = "/bbs/list.do";
 				break;
 			default :
 				break;

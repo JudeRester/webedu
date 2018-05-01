@@ -15,7 +15,25 @@ public class BbsDTO {
 	private int bHit; //조회수
 	private int bGroup; //답글 그룹
 	private int bStep; //답글 단계
+	private int pPage;
+	private int nPage;
 	
+	public int getnPage() {
+		return nPage;
+	}
+
+	public void setnPage(int nPage) {
+		this.nPage = nPage;
+	}
+
+	public int getpPage() {
+		return pPage;
+	}
+
+	public void setpPage(int pPage) {
+		this.pPage = pPage;
+	}
+
 	public BbsDTO() {}
 	
 	public BbsDTO(int bNum, String bTitle, String bId, String bName, String bContent, String bIndent, Date bCDate,

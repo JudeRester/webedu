@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 </head>
 <body>
 <table class="table table-hover">
-	<form action="/webedu/bbs/modify_ac.do?bNum=${bNum }">
+	<form action="/webedu/bbs/modify_ac.do?bNum=${bdto.bNum }" method="post">
 		<tr>
 			<th scope="col" class="w-25 p-3">제목</th>
 			<td scope="col"><input type="text" name="bTitle" class="form-control" id="" placeholder="insert title" value="${bdto.getbTitle() }"/></td>
@@ -28,8 +29,8 @@
 		</tr>
 		<tr>
 			<td colspan=2>
-			<input type="submit" class="btn btn-primary" value="등록" />
-		 	<a href="list.do" class="btn btn-primary" role="button" aria-pressed="true" aria-describedby="inputGroup-sizing-sm"> 목록으로</a>
+			<input type="submit" class="btn btn-primary" value="수정" />
+		 	<a href="view.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true" aria-describedby="inputGroup-sizing-sm">취소</a>
 		</tr>
 	</form>
 </table>

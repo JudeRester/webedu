@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    
 
 <!DOCTYPE html>
@@ -46,6 +46,7 @@
 		<td colspan=2 align="right">
 		<a href="modify.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true">수정</a>
 	 	<a href="list.do" class="btn btn-primary" role="button" aria-pressed="true" aria-describedby="inputGroup-sizing-sm"> 목록으로</a>
+	 	<a class="btn btn-primary" role="button" aria-pressed="true" href="view.do?bNum=${bdto.getpPage() }">Previous</a></li>
 	 	</td>
 	</tr>
 	</table>

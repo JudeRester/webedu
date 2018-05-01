@@ -108,6 +108,8 @@ public class BbsDAO {
 		BbsDTO bbsdto = null;
 		String sql2 = "update BBS SET BHIT=(BHIT+1) where BNUM = ?";
 		String sql = "select BNUM, BTITLE, BNAME, BCDATE, BUDATE, BHIT, BCONTENT FROM bbs where bnum = ?";
+		String sql3 = "select bNum from bbs where bNum=(select max(bNum) from bbs where bNum < ?)";
+		String sql4 = "select bNum from bbs where bNum=(select min(bNum) from bbs where bNum > ?)";
 		try {
 			conn=DataBaseUtil.getConnection();
 			pstmt = conn.prepareStatement(sql2);
@@ -126,7 +128,24 @@ public class BbsDAO {
 				bbsdto.setbHit(rs.getInt("bHit"));
 				bbsdto.setbContent(rs.getString("bContent"));
 			}
-		
+			pstmt = conn.prepareStatement(sql3);
+			pstmt.setInt(1, bNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				bbsdto.setpPage(rs.getInt("bNum"));
+				System.out.println(bbsdto.getpPage());
+			}else {
+				bbsdto.setpPage(bbsdto.getbNum());
+			}
+			pstmt = conn.prepareStatement(sql4);
+			pstmt.setInt(1, bNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				bbsdto.setnPage(rs.getInt("bNum"));
+				System.out.println(bbsdto.getnPage());
+			}else {
+				bbsdto.setnPage(bbsdto.getbNum());
+			}
 		} catch (SQLException e) {
 			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO view(int bNum)");
 	      } finally {
@@ -156,8 +175,9 @@ public class BbsDAO {
 	      }
 		return bdto;
 	}
-	public BbsDTO modify_ac(BbsDTO bdto) {
+	public int modify_ac(BbsDTO bdto) {
 		String sql = "update BBS SET btitle=?, bname=?, bcontent=? where BNUM = ?";
+		int cnt = 0;
 		try {
 			conn=DataBaseUtil.getConnection();
 			pstmt=conn.prepareStatement(sql);
@@ -165,11 +185,13 @@ public class BbsDAO {
 			pstmt.setString(2, bdto.getbName());
 			pstmt.setString(3, bdto.getbContent());
 			pstmt.setInt(4, bdto.getbNum());
+			
+			cnt = pstmt.executeUpdate();
 		}catch(SQLException e) {
-			
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO modify_ac(BbsDTO bdto)");
 		}finally {
-			
+			DataBaseUtil.close(conn, pstmt);
 		}
-		return bdto;
+		return cnt;
 	}
 }
