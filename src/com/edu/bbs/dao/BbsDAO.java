@@ -34,9 +34,6 @@ public class BbsDAO {
 		try {
 			conn=DataBaseUtil.getConnection();
 			pstmt=conn.prepareStatement(sql.toString());
-			System.out.println(bbsdto.getbTitle());
-			System.out.println(bbsdto.getbName());
-			System.out.println(bbsdto.getbContent());
 			pstmt.setString(1, bbsdto.getbTitle());
 			pstmt.setString(2, bbsdto.getbName());
 			pstmt.setString(3, bbsdto.getbContent());
@@ -53,8 +50,11 @@ public class BbsDAO {
 		ArrayList<BbsDTO> alist = new ArrayList<>();
 		StringBuffer str = new StringBuffer();
 		BbsDTO bbsdto = null;
-		str.append("select bnum, btitle, bname, bhit, bcontent from bbs")
-		.append(" order by bnum desc");
+		str.append("select bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent ")
+		.append("from bbs")
+		.append(" start with bGroup is null")
+		.append(" connect by prior bnum = bgroup")
+		.append(" order siblings by bgroup desc, bstep asc, bcdate desc");
 		try {
 			conn = DataBaseUtil.getConnection();
 			pstmt = conn.prepareStatement(str.toString());
@@ -66,6 +66,7 @@ public class BbsDAO {
 				bbsdto.setbName(rs.getString("bname"));
 				bbsdto.setbHit(rs.getInt("bhit"));
 				bbsdto.setbContent(rs.getString("bcontent"));
+				bbsdto.setbIndent(rs.getInt("bindent"));
 				alist.add(bbsdto);
 			}
 		} catch (SQLException e) {
@@ -206,5 +207,50 @@ public class BbsDAO {
 			DataBaseUtil.close(conn, pstmt);
 		}
 		return cnt;
+	}
+	public BbsDTO preinfo(int bNum) {
+		BbsDTO bbsdto = null;
+		String sql = "select BNUM, BTITLE, BCONTENT, bgroup, bindent FROM bbs where bnum = ?";
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bNum);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				bbsdto = new BbsDTO();
+				bbsdto.setbNum(rs.getInt("bNum"));
+				bbsdto.setbTitle(rs.getString("bTitle"));
+				bbsdto.setbContent(rs.getString("bContent"));
+				bbsdto.setbGroup(rs.getInt("bgroup"));
+				bbsdto.setbIndent(rs.getInt("bindent"));
+			}
+		} catch (SQLException e) {
+			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO preinfo(int bNum)");
+	      } finally {
+	         DataBaseUtil.close(conn, pstmt, rs);
+	      }
+		return bbsdto;
+	}
+	public void reply(BbsDTO bbsdto) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into bbs (bnum, btitle, bname, bcontent, bgroup, bindent) ")
+		.append("values(bbsnum_seq.nextval,?,?,?,?,?)");
+		int cnt =0;
+		
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setString(1, bbsdto.getbTitle());
+			pstmt.setString(2, bbsdto.getbName());
+			pstmt.setString(3, bbsdto.getbContent());
+			pstmt.setInt(4, bbsdto.getbNum());
+			pstmt.setInt(5, bbsdto.getbIndent());
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			DataBaseUtil.printSQLException(e,
+					this.getClass().getName()+":void write(BbsDTO bbsdto)");
+		} finally {
+			DataBaseUtil.close(conn, pstmt);
+		}
 	}
 }

@@ -30,7 +30,10 @@
    		<c:forEach items="${list }" var="dto">
       <tr>
       	<th scope="row">${dto.bNum }</th>
-        <td><a href="view.do?bNum=${dto.bNum }">${dto.bTitle }</a></td>
+        <td>
+        <c:forEach begin="1" end="${dto.bIndent }">└</c:forEach>
+        <a href="view.do?bNum=${dto.bNum }">${dto.bTitle }</a>
+        </td>
         <td>${dto.bName }</td>
         <td>${dto.bHit }</td>
       </tr>

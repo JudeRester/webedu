@@ -9,7 +9,7 @@ public class BbsDTO {
 	private String bId; //작성자 아이디
 	private String bName; //작성자 이름
 	private String bContent; //내용
-	private String bIndent; //답글 들여쓰기
+	private int bIndent; //답글 들여쓰기
 	private Date bCDate; //작성일
 	private Date bUDate; //수정일
 	private int bHit; //조회수
@@ -36,7 +36,7 @@ public class BbsDTO {
 
 	public BbsDTO() {}
 	
-	public BbsDTO(int bNum, String bTitle, String bId, String bName, String bContent, String bIndent, Date bCDate,
+	public BbsDTO(int bNum, String bTitle, String bId, String bName, String bContent, int bIndent, Date bCDate,
 			Date bUDate, int bHit, int bGroup, int bStep) {
 		super();
 		this.bNum = bNum;
@@ -82,10 +82,10 @@ public class BbsDTO {
 	public void setbContent(String bContent) {
 		this.bContent = bContent;
 	}
-	public String getbIndent() {
+	public int getbIndent() {
 		return bIndent;
 	}
-	public void setbIndent(String bIndent) {
+	public void setbIndent(int bIndent) {
 		this.bIndent = bIndent;
 	}
 	public Date getbCDate() {

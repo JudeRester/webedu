@@ -15,6 +15,7 @@ import com.edu.bbs.cmd.BbsDeleteCmd;
 import com.edu.bbs.cmd.BbsListCmd;
 import com.edu.bbs.cmd.BbsModifyCmd;
 import com.edu.bbs.cmd.BbsModifyacCmd;
+import com.edu.bbs.cmd.BbsReplyCmd;
 import com.edu.bbs.cmd.BbsWriteCmd;
 /**
  * Servlet implementation class FrontController
@@ -93,6 +94,12 @@ public class FrontController extends HttpServlet {
 				command = new BbsDeleteCmd();
 				command.execute(request, response);
 				viewPage = "/bbs/list.do";
+				break;
+			case "/bbs/reply.do" :
+				command = new BbsReplyCmd();
+				command.execute(request, response);
+				viewPage = "/bbs/reply_form.jsp";
+				break;
 			default :
 				break;
 		}
