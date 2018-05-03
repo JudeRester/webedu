@@ -24,12 +24,14 @@
 		</tr>
 		<tr>
 			<th scope="col">내용</th>
-			<td scope="col"><textarea class="form-control" name="bContent" id="" >${bdto.getbContent() }
+			<td scope="col"><textarea class="form-control" name="bContent" id="" >${bdto.getbContent() }<br />
 ---------------------
 </textarea></td>
 		</tr>
-		
+		<input type="hidden" name="bGroup" value="${bdto.bNum}"/>
+		<input type="hidden" name="bIndent" value="${bdto.bIndent }"/>
 		<tr>
+		
 			<td colspan=2>
 			<input type="submit" class="btn btn-primary" value="등록" />
 		 	<a href="view.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true" aria-describedby="inputGroup-sizing-sm">취소</a>

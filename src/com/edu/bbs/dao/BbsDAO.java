@@ -25,11 +25,13 @@ public class BbsDAO {
 		return bdao;
 	}
 	//글 등록
-	public void write(BbsDTO bbsdto) {
+	public int write(BbsDTO bbsdto) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("insert into bbs (bnum, btitle, bname, bcontent) ")
 		.append("values(bbsnum_seq.nextval,?,?,?)");
-		int cnt =0;
+		int cnt = 0;
+		String sql2 ="select bbsnum_seq.currval from dual";
+		int bNum= 0;
 		
 		try {
 			conn=DataBaseUtil.getConnection();
@@ -39,12 +41,18 @@ public class BbsDAO {
 			pstmt.setString(3, bbsdto.getbContent());
 			
 			cnt = pstmt.executeUpdate();
+			pstmt=conn.prepareStatement(sql2);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bNum=rs.getInt("currval");
+			}
 		} catch (SQLException e) {
 			DataBaseUtil.printSQLException(e,
 					this.getClass().getName()+":void write(BbsDTO bbsdto)");
 		} finally {
 			DataBaseUtil.close(conn, pstmt);
 		}
+		return bNum;
 	}
 	public ArrayList<BbsDTO> list(){
 		ArrayList<BbsDTO> alist = new ArrayList<>();
@@ -109,8 +117,8 @@ public class BbsDAO {
 		BbsDTO bbsdto = null;
 		String sql2 = "update BBS SET BHIT=(BHIT+1) where BNUM = ?";
 		String sql = "select BNUM, BTITLE, BNAME, BCDATE, BUDATE, BHIT, BCONTENT FROM bbs where bnum = ?";
-		String sql3 = "select bNum from bbs where bNum=(select max(bNum) from bbs where bNum < ?)";
-		String sql4 = "select bNum from bbs where bNum=(select min(bNum) from bbs where bNum > ?)";
+		String sql3 = "select bNum from bbs where bNum=(select max(bNum) from bbs where bNum < ? and bgroup is null) ";
+		String sql4 = "select bNum from bbs where bNum=(select min(bNum) from bbs where bNum > ? and bgroup is null)";
 		try {
 			conn=DataBaseUtil.getConnection();
 			pstmt = conn.prepareStatement(sql2);
@@ -177,6 +185,8 @@ public class BbsDAO {
 	public int modify_ac(BbsDTO bdto) {
 		String sql = "update BBS SET btitle=?, bname=?, bcontent=?, BUDATE=sysdate where BNUM = ?";
 		int cnt = 0;
+		String sql2 ="select bbsnum_seq.currval from dual";
+		int bNum= 0;
 		try {
 			conn=DataBaseUtil.getConnection();
 			pstmt=conn.prepareStatement(sql);
@@ -186,12 +196,17 @@ public class BbsDAO {
 			pstmt.setInt(4, bdto.getbNum());
 			
 			cnt = pstmt.executeUpdate();
+			pstmt=conn.prepareStatement(sql2);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bNum=rs.getInt("currval");
+			}
 		}catch(SQLException e) {
 			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO modify_ac(BbsDTO bdto)");
 		}finally {
 			DataBaseUtil.close(conn, pstmt);
 		}
-		return cnt;
+		return bNum;
 	}
 	public int delete(int bNum) {
 		int cnt = 0;
@@ -231,26 +246,33 @@ public class BbsDAO {
 	      }
 		return bbsdto;
 	}
-	public void reply(BbsDTO bbsdto) {
+	public int reply(BbsDTO bbsdto) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("insert into bbs (bnum, btitle, bname, bcontent, bgroup, bindent) ")
 		.append("values(bbsnum_seq.nextval,?,?,?,?,?)");
 		int cnt =0;
-		
+		String sql2 ="select bbsnum_seq.currval from dual";
+		int bNum= 0;
 		try {
 			conn=DataBaseUtil.getConnection();
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setString(1, bbsdto.getbTitle());
 			pstmt.setString(2, bbsdto.getbName());
 			pstmt.setString(3, bbsdto.getbContent());
-			pstmt.setInt(4, bbsdto.getbNum());
+			pstmt.setInt(4, bbsdto.getbGroup());
 			pstmt.setInt(5, bbsdto.getbIndent());
 			cnt = pstmt.executeUpdate();
+			pstmt=conn.prepareStatement(sql2);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bNum=rs.getInt("currval");
+			}
 		} catch (SQLException e) {
 			DataBaseUtil.printSQLException(e,
 					this.getClass().getName()+":void write(BbsDTO bbsdto)");
 		} finally {
 			DataBaseUtil.close(conn, pstmt);
 		}
+		return bNum;
 	}
 }

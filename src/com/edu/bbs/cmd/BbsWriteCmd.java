@@ -17,7 +17,7 @@ public class BbsWriteCmd implements BCommand {
 		bbsdto.setbContent(request.getParameter("bContent"));
 		
 		BbsDAO bbsdao = BbsDAO.getInstance();
-		bbsdao.write(bbsdto);
+		request.setAttribute("bNum", bbsdao.write(bbsdto));
 	}
 
 }

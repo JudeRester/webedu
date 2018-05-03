@@ -34,7 +34,9 @@
 	    <p align="left" style="margin-bottom:0px;padding-up:2px;padding-down:2px">작성자 :${bdto.getbName() }</p>
 	    <hr style="margin-top:0px;padding-up:0px;" />
 	    <div>
-		${bdto.getbContent() }<br>
+	    <pre>
+${bdto.bContent }
+		</pre>
 		<hr />
 		</div>
 		</div>

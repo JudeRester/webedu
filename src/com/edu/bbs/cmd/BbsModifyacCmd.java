@@ -17,8 +17,6 @@ public class BbsModifyacCmd implements BCommand {
 		bbsdto.setbContent(request.getParameter("bContent"));
 		bbsdto.setbNum(Integer.parseInt(request.getParameter("bNum")));
 		BbsDAO bdao = BbsDAO.getInstance();
-		if(bdao.modify_ac(bbsdto)!=1) {
-			System.out.println("글 수정에 실패하였습니다.");
-		}
+		request.setAttribute("bNum",bdao.modify_ac(bbsdto));
 	}
 }
