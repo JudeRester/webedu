@@ -11,13 +11,10 @@ class testBbsDAO {
 
 	@Test
 	void test() {
-		
 		BbsDAO bdao = BbsDAO.getInstance();
 		ArrayList<BbsDTO> alist = bdao.list(1,10);
 		for(BbsDTO bdto : alist) {
 			System.out.println(bdto);
-			
 		}
 	}
-
 }

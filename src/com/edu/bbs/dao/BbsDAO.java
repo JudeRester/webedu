@@ -54,18 +54,23 @@ public class BbsDAO {
 		}
 		return bNum;
 	}
-	public ArrayList<BbsDTO> list(){
+	public ArrayList<BbsDTO> list(int a, int b){
 		ArrayList<BbsDTO> alist = new ArrayList<>();
 		StringBuffer str = new StringBuffer();
 		BbsDTO bbsdto = null;
-		str.append("select bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent ")
-		.append("from bbs")
-		.append(" start with bGroup is null")
-		.append(" connect by prior bnum = bgroup")
-		.append(" order siblings by bgroup desc, bstep asc, bcdate desc");
+		str.append("select rnum, bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent ")
+		.append("from (select rownum as rnum, bnum, btitle,bname, bhit, bcontent, bgroup, bstep, bindent ")
+		.append("from (select bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent ")
+		.append("from bbs start with bGroup is null ")
+		.append("connect by prior bnum = bgroup ")
+		.append(" order siblings by bgroup desc, bstep asc, bcdate desc)")
+		.append(" where rownum <= ?)")
+		.append(" where rnum >= ?");
 		try {
 			conn = DataBaseUtil.getConnection();
 			pstmt = conn.prepareStatement(str.toString());
+			pstmt.setInt(1, 10);
+			pstmt.setInt(2, 1);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				bbsdto = new BbsDTO();
