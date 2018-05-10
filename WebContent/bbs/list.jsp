@@ -31,7 +31,7 @@
       <tr>
       	<th scope="row">${dto.bNum }</th>
         <td>
-        <c:forEach begin="1" end="${dto.bIndent }">└</c:forEach>
+        <c:forEach begin="1" end="${dto.bIndent }">┗</c:forEach>
         <a href="view.do?bNum=${dto.bNum }">${dto.bTitle }</a>
         </td>
         <td>${dto.bName }</td>

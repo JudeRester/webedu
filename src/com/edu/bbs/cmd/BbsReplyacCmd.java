@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.edu.bbs.dao.BbsDAO;
+import com.edu.bbs.dao.BbsDAOimpl;
 import com.edu.bbs.dto.BbsDTO;
 
 public class BbsReplyacCmd implements BCommand {
@@ -11,7 +12,7 @@ public class BbsReplyacCmd implements BCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		BbsDTO bdto = new BbsDTO();
-		BbsDAO bdao = BbsDAO.getInstance();
+		BbsDAO bdao = BbsDAOimpl.getInstance();
 		bdto.setbTitle(request.getParameter("bTitle"));
 		bdto.setbName(request.getParameter("bName"));
 		bdto.setbContent(request.getParameter("bContent"));
