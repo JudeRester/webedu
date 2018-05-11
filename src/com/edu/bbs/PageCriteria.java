@@ -1,12 +1,10 @@
-/**
- * 
- */
 package com.edu.bbs;
 
-/**
- * @author Administrator
- *
- */
 public class PageCriteria {
-
+	private int totalrec;
+	private int lsatpage;
+	private int currpage;
+	private int startrec;
+	private int lastrec;
+	
 }
