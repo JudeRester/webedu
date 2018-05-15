@@ -1,14 +1,18 @@
 package com.edu.bbs;
 
 public class PageCriteria {
-	private int totalrec;	//총 게시글 수
-	private int lastpage; 	//마지막 페이지
-	private int currpage; 	//현재 페이지
-	private int pagenum; 	//페이지번호
-	private int showamount=10; //표시할 게시글 수
+	private int totalrec;		//총 게시글 수
+	private int lastpage; 		//마지막 페이지
+	private int currpage; 		//현재 페이지
+	private int pagenum; 		//페이지번호
+	private int showamount=10;  //표시할 게시글 수
+	private int startpage;		//단위시작페이지
+	private int endpage;		//단위마지막페이지
 	
-	public PageCriteria(int totalrec) {
+	
+	public PageCriteria(int currpage, int totalrec) {
 		this.totalrec = totalrec;
+		this.currpage = currpage;
 		init();
 	}
 	
@@ -18,9 +22,41 @@ public class PageCriteria {
 		}else {
 			lastpage = totalrec / showamount;
 		}
+		startpage = (currpage-1)/showamount*showamount+1;
+		endpage = startpage + showamount -1;
+		if(currpage>lastpage) {
+			currpage=lastpage;
+		}
+		if(endpage>lastpage) {
+			endpage = lastpage;
+		}
 		
 	}
+	//페이지 첫 글
+	public int getStartrec() {
+		return (currpage-1)*showamount+1;
+	}	
+	//페이지 마지막 글
+	public int getLastrec() {
+		return getStartrec()+showamount-1;
+	}
 	
+	public int getStartpage() {
+		return startpage;
+	}
+
+	public void setStartpage(int startpage) {
+		this.startpage = startpage;
+	}
+
+	public int getEndpage() {
+		return endpage;
+	}
+
+	public void setEndpage(int endpage) {
+		this.endpage = endpage;
+	}
+
 	public int getPagenum() {
 		return pagenum;
 	}
@@ -51,14 +87,4 @@ public class PageCriteria {
 	public void setCurrpage(int currpage) {
 		this.currpage = currpage;
 	}
-	//페이지 첫 글
-	public int getStartrec() {
-		return (pagenum-1)*showamount;
-	}
-	//페이지 마지막 글
-	public int getLastrec() {
-		return getStartrec()+showamount-1;
-	}
-	
-	
 }

@@ -38,13 +38,68 @@
         <td>${dto.bHit }</td>
       </tr>
       </c:forEach>
-     	<tr>
-     		<td colspan="5" align="right">
+      <tr>
+      <td colspan="4">
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination" >
+		  	 <c:if test="false"> <!-- pageCreateria.isPrev() -->
+			    <li class="page-item">
+			    	<a class="page-link" href="list.do?reqPage=1">◀</a>
+			    </li>		  	 
+			    <li class="page-item">
+			    	<a class="page-link" href="list.do?currpage=${pc.startpage-1}">◁</a>
+			    </li>
+		    </c:if>
+		    <c:forEach begin="${pc.startpage }" end="${pc.endpage }" var="pageNum">
+		    	<c:if test="${pc.currpage == pageNum }">
+			    <li class="page-item active">		
+			      <a class="page-link" href="list.do?currpage=${pageNum}">${pageNum}</a>
+			    </li>
+	    		 </c:if>   
+	    		 <c:if test="${pc.currpage != pageNum }">
+			    <li class="page-item">
+			    	<a class="page-link" href="list.do?currpage=${pageNum}">${pageNum}</a>
+			    </li>
+			    </c:if>
+		    </c:forEach>
+		    <c:if test="true">
+			    <li class="page-item">
+			    	<a class="page-link" href="list.do?currpage=${pc.endpage+1}">▷</a>
+			    </li>
+			    <li class="page-item">
+			    	<a class="page-link" href="list.do?currpage=${pc.lastpage}">▶</a>
+			    </li>		    
+		    </c:if>		    
+		  </ul>
+		</nav>          
+      </td>
+		<td colspan="5" align="">
+		<a href="write_view.do?currpage=${pc.currpage }" class="btn btn-primary" role="button" aria-pressed="true">글쓰기</a>
+		</td> 
+    </tr>  
+    </tbody>
+    </table>
+    <!-- table>
+    <tr>
+      <c:forEach begin="${pc.startpage }" end="${pc.endpage }" var="pageNum">
+    	<c:if test="${pc.currpage == pageNum }">
+	    <td class="page-item active">		
+	      <a class="page-link" href="list.do?currpage=${pageNum}">${pageNum}</a>
+  	    </td>
+   			 </c:if>   
+   			 <c:if test="${pc.currpage != pageNum }">
+	 	   <td class="page-item">
+	    	<a class="page-link" href="list.do?currpage=${pageNum}">${pageNum}</a>
+	 	   </td>
+	 	   </c:if>
+  		  </c:forEach>
+  		  </tr>
+  		  <tr>
+  		  <td colspan="5" align="right">
      		<a href="write_view.do" class="btn btn-primary" role="button" aria-pressed="true">글쓰기</a>
      		</td>
-     	</tr>
-    </tbody>
-  </table>
+     		</tr>
+  </table-->
 </div>
 
 </body>

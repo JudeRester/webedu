@@ -22,4 +22,6 @@ public interface BbsDAO {
 
 	int reply(BbsDTO bbsdto);
 
+	int totalrec();
+
 }

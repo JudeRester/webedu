@@ -49,12 +49,13 @@ public class BbsDAOimpl implements BbsDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				bNum=rs.getInt("currval");
+				System.out.println(bNum);
 			}
 		} catch (SQLException e) {
 			DataBaseUtil.printSQLException(e,
 					this.getClass().getName()+":void write(BbsDTO bbsdto)");
 		} finally {
-			DataBaseUtil.close(conn, pstmt);
+			DataBaseUtil.close(conn, pstmt,rs);
 		}
 		return bNum;
 	}
@@ -71,14 +72,15 @@ public class BbsDAOimpl implements BbsDAO {
 		.append("from (select bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent ")
 		.append("from bbs start with bGroup is null ")
 		.append("connect by prior bnum = bgroup ")
-		.append(" order siblings by bgroup desc, bstep asc, bcdate desc)")
+		.append(" order siblings by bgroup desc, bstep asc, bcdate desc, bnum desc)")
 		.append(" where rownum <= ?)")
 		.append(" where rnum >= ?");
 		try {
 			conn = DataBaseUtil.getConnection();
 			pstmt = conn.prepareStatement(str.toString());
-			pstmt.setInt(1, 10);
-			pstmt.setInt(2, 1);
+			pstmt.setInt(1, b);
+			pstmt.setInt(2, a);
+			System.out.println(b+","+a);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				bbsdto = new BbsDTO();
@@ -229,7 +231,7 @@ public class BbsDAOimpl implements BbsDAO {
 		}catch(SQLException e) {
 			DataBaseUtil.printSQLException(e, this.getClass().getName()+"BbsDTO modify_ac(BbsDTO bdto)");
 		}finally {
-			DataBaseUtil.close(conn, pstmt);
+			DataBaseUtil.close(conn, pstmt,rs);
 		}
 		return bNum;
 	}
@@ -308,8 +310,30 @@ public class BbsDAOimpl implements BbsDAO {
 			DataBaseUtil.printSQLException(e,
 					this.getClass().getName()+":void write(BbsDTO bbsdto)");
 		} finally {
-			DataBaseUtil.close(conn, pstmt);
+			DataBaseUtil.close(conn, pstmt,rs);
 		}
 		return bNum;
 	}
+
+	@Override
+	public int totalrec() {
+		int totalrec = 0;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select count(*) totalrec from bbs");
+		try {
+			conn=DataBaseUtil.getConnection();
+			pstmt=conn.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				totalrec = rs.getInt("totalrec");
+			}
+		}catch(SQLException e){
+			DataBaseUtil.printSQLException(e,
+					this.getClass().getName()+":int totalrec()");
+		} finally {
+			DataBaseUtil.close(conn, pstmt,rs);
+		}
+		return totalrec;
+	}
+	
 }
