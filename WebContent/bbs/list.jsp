@@ -42,9 +42,9 @@
       <td colspan="4">
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination" >
-		  	 <c:if test="false"> <!-- pageCreateria.isPrev() -->
+		  	 <c:if test="${pc.pre }"> 
 			    <li class="page-item">
-			    	<a class="page-link" href="list.do?reqPage=1">◀</a>
+			    	<a class="page-link" href="list.do?currpage=1">◀</a>
 			    </li>		  	 
 			    <li class="page-item">
 			    	<a class="page-link" href="list.do?currpage=${pc.startpage-1}">◁</a>
@@ -62,7 +62,7 @@
 			    </li>
 			    </c:if>
 		    </c:forEach>
-		    <c:if test="true">
+		    <c:if test="${pc.next }">
 			    <li class="page-item">
 			    	<a class="page-link" href="list.do?currpage=${pc.endpage+1}">▷</a>
 			    </li>

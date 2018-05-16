@@ -8,6 +8,9 @@ public class PageCriteria {
 	private int showamount=10;  //표시할 게시글 수
 	private int startpage;		//단위시작페이지
 	private int endpage;		//단위마지막페이지
+	private boolean pre;		//이전페이지 여부
+	
+	private boolean next;		//다음 페이지 여부
 	
 	
 	public PageCriteria(int currpage, int totalrec) {
@@ -30,7 +33,8 @@ public class PageCriteria {
 		if(endpage>lastpage) {
 			endpage = lastpage;
 		}
-		
+		pre = startpage ==1 ? false : true;
+		next = endpage == lastpage ? false : true;
 	}
 	//페이지 첫 글
 	public int getStartrec() {
@@ -40,7 +44,21 @@ public class PageCriteria {
 	public int getLastrec() {
 		return getStartrec()+showamount-1;
 	}
-	
+	public boolean isPre() {
+		return pre;
+	}
+
+	public void setPre(boolean pre) {
+		this.pre = pre;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
 	public int getStartpage() {
 		return startpage;
 	}
