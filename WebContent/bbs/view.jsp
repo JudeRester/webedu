@@ -49,7 +49,7 @@ ${bdto.bContent }
 		<a href="modify.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true">수정</a>
 		<a href="delete.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true">삭제</a>
 		<a href="reply.do?bNum=${bdto.bNum }" class="btn btn-primary" role="button" aria-pressed="true">답글</a>
-	 	<a href="list.do" class="btn btn-primary" role="button" aria-pressed="true" aria-describedby="inputGroup-sizing-sm"> 목록으로</a>
+	 	<a href="list.do?currpage=${currpage }" class="btn btn-primary" role="button" aria-pressed="true" aria-describedby="inputGroup-sizing-sm"> 목록으로</a>
 	 	<a class="btn btn-primary" role="button" aria-pressed="true" href="view.do?bNum=${bdto.getpPage() }">◀</a>
 	 	<a class="btn btn-primary" role="button" aria-pressed="true" href="view.do?bNum=${bdto.getnPage() }">▶</a>
 	 	</td>

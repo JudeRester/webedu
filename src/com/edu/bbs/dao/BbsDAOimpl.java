@@ -80,7 +80,6 @@ public class BbsDAOimpl implements BbsDAO {
 			pstmt = conn.prepareStatement(str.toString());
 			pstmt.setInt(1, b);
 			pstmt.setInt(2, a);
-			System.out.println(b+","+a);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				bbsdto = new BbsDTO();
@@ -98,6 +97,12 @@ public class BbsDAOimpl implements BbsDAO {
 		} finally {
 			DataBaseUtil.close(conn, pstmt, rs);
 		}
+		return alist;
+	}
+	@Override
+	public ArrayList<BbsDTO> list(int a, int b, String keyword, String col){
+		ArrayList<BbsDTO> alist = null;
+		
 		return alist;
 	}
 	/*create or replace procedure  Clist_callbbs (

@@ -13,9 +13,12 @@ public class BbsBviewCmd implements BCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		int a=0;
+		int currpage=0;
 		BbsDAO bbsdao = BbsDAOimpl.getInstance();
 		try {
 		a=Integer.parseInt(request.getParameter("bNum"));
+		currpage=Integer.parseInt(request.getParameter("currpage"));
+		request.setAttribute("currpage", currpage);
 		}catch(NumberFormatException e) {
 			a = (int)request.getAttribute("bNum");
 		}finally {

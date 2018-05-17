@@ -32,7 +32,7 @@
       	<th scope="row">${dto.bNum }</th>
         <td>
         <c:forEach begin="1" end="${dto.bIndent }">┗</c:forEach>
-        <a href="view.do?bNum=${dto.bNum }">${dto.bTitle }</a>
+        <a href="view.do?bNum=${dto.bNum }&currpage=${pc.currpage }">${dto.bTitle }</a>
         </td>
         <td>${dto.bName }</td>
         <td>${dto.bHit }</td>
