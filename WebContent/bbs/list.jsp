@@ -76,7 +76,20 @@
 		<td colspan="5" align="">
 		<a href="write_view.do?currpage=${pc.currpage }" class="btn btn-primary" role="button" aria-pressed="true">글쓰기</a>
 		</td> 
-    </tr>  
+    </tr>
+     <tr>
+     	<td>
+     	<form action="/bbs/list.do" method="post">
+     		<select name="option" class="form-control-sm"><
+     			<option <c:out value = "${option == '제목 내용' ? 'selected' : ''}"/>>제목 + 내용</option>
+     			<option <c:out value = "${option == '제목' ? 'selected' : ''}"/>>제목</option>
+     			<option <c:out value = "${option == '내용' ? 'selected' : ''}"/>>내용</option>
+     			<option <c:out value = "${option == '작성자' ? 'selected' : ''}"/>>작성자</option>
+     		</select>
+     		<input type="text" name="search" class="form-control-sm" value="${search }" />
+     	</form>
+     	</td>
+     </tr>
     </tbody>
     </table>
     <!-- table>

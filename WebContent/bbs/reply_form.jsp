@@ -16,7 +16,7 @@
 	<form action="/webedu/bbs/reply_ac.do">
 		<tr>
 			<th scope="col" class="w-25 p-3">제목</th>
-			<td scope="col"><input type="text" name="bTitle" class="form-control" id="" placeholder="insert title" value="[답글]${bdto.getbTitle() }"/></td>
+			<td scope="col"><input type="text" name="bTitle" class="form-control" id="" placeholder="insert title" value="${bdto.getbTitle() }"/></td>
 		</tr>
 		<tr>
 			<th scope="col">작성자</th>
