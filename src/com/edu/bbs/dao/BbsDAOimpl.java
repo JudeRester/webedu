@@ -67,11 +67,11 @@ public class BbsDAOimpl implements BbsDAO {
 		ArrayList<BbsDTO> alist = new ArrayList<>();
 		StringBuffer str = new StringBuffer();
 		BbsDTO bbsdto = null;
-		str.append("select rnum, bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent ")
+		str.append("select * ")
 		.append("from (select rownum as rnum, bnum, btitle,bname, bhit, bcontent, bgroup, bstep, bindent ")
 		.append("from (select bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent ")
-		.append("from bbs start with bGroup is null ")
-		.append("connect by prior bnum = bgroup ")
+		.append("from bbs ")
+		.append("start with bGroup is null connect by prior bnum = bgroup ")
 		.append(" order siblings by bgroup desc, bstep asc, bcdate desc, bnum desc)")
 		.append(" where rownum <= ?)")
 		.append(" where rnum >= ?");
@@ -101,8 +101,66 @@ public class BbsDAOimpl implements BbsDAO {
 	}
 	@Override
 	public ArrayList<BbsDTO> list(int a, int b, String keyword, String col){
-		ArrayList<BbsDTO> alist = null;
+		ArrayList<BbsDTO> alist = new ArrayList<>();
+		StringBuffer str = new StringBuffer();
+		BbsDTO bbsdto = null;
 		
+		str.append("select * ")
+		.append("from (select rownum as rnum, bnum, btitle,bname, bhit, bcontent, bgroup, bstep, bindent ")
+		.append("from (select bnum, btitle, bname, bhit, bcontent, bgroup, bstep, bindent ")
+		.append("from bbs where");
+		switch(col) {
+		case "제목내용" :
+			str.append("(bTitle like ? or bContent like ?)");
+			break;
+		case "제목" :
+			str.append("(bTitle like ?)");
+			break;
+		case "내용" :
+			str.append("(bContent like ?)");
+			break;
+		case "작성자" :
+			str.append("(bName like ?)");
+			break;
+		
+		}
+		str.append("start with bGroup is null connect by prior bnum = bgroup ")
+		.append(" order siblings by bgroup desc, bstep asc, bcdate desc, bnum desc)")
+		.append(" where rownum <= ?)")
+		.append(" where rnum >= ?");
+		
+		try {
+			conn = DataBaseUtil.getConnection();
+			pstmt = conn.prepareStatement(str.toString());
+			switch(col) {
+			case "제목내용" :
+				pstmt.setString(1, keyword);
+				pstmt.setString(2, keyword);
+				pstmt.setInt(3, b);
+				pstmt.setInt(4, a);
+				break;
+			default :
+				pstmt.setString(1, keyword);
+				pstmt.setInt(2, b);
+				pstmt.setInt(3, a);
+			}
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				bbsdto = new BbsDTO();
+				bbsdto.setbNum(rs.getInt("bNum"));
+				bbsdto.setbTitle(rs.getString("btitle"));
+				bbsdto.setbName(rs.getString("bname"));
+				bbsdto.setbHit(rs.getInt("bhit"));
+				bbsdto.setbContent(rs.getString("bcontent"));
+				bbsdto.setbIndent(rs.getInt("bindent"));
+				alist.add(bbsdto);
+			}
+		} catch (SQLException e) {
+			DataBaseUtil.printSQLException(e,
+					this.getClass().getName()+": ArrayList<BbsDTO> list()");
+		} finally {
+			DataBaseUtil.close(conn, pstmt, rs);
+		}
 		return alist;
 	}
 	/*create or replace procedure  Clist_callbbs (
