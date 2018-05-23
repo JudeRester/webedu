@@ -26,4 +26,6 @@ public interface BbsDAO {
 
 	ArrayList<BbsDTO> list(int a, int b, String keyword, String col);
 
+	int totalrec(String col, String keyword);
+
 }

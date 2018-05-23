@@ -398,5 +398,42 @@ public class BbsDAOimpl implements BbsDAO {
 		}
 		return totalrec;
 	}
+	@Override
+	public int totalrec(String col, String keyword) {
+		int totalrec = 0;
+		StringBuffer sql = new StringBuffer();
+		sql.append("select count(*) totalrec from bbs");
+		try {
+			conn=DataBaseUtil.getConnection();
+			switch(col) {
+			case "제목내용" :
+				sql.append(" where bTitle like ? or bContent like ?");
+				pstmt=conn.prepareStatement(sql.toString());
+				break;
+			case "제목" :
+				sql.append(" where bTitle like ?");
+				break;
+			case "내용" :
+				sql.append(" where bContent like ?");
+				break;
+			case "작성자" :
+				sql.append(" where bName like ?");
+				break;
+			}
+			pstmt=conn.prepareStatement(sql.toString());
+			pstmt.setString(1, keyword);
+			if(col.equals("제목내용")) pstmt.setString(2, keyword);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				totalrec = rs.getInt("totalrec");
+			}
+		}catch(SQLException e){
+			DataBaseUtil.printSQLException(e,
+					this.getClass().getName()+":int totalrec(String col, String keyword)");
+		} finally {
+			DataBaseUtil.close(conn, pstmt,rs);
+		}
+		return totalrec;
+	}
 	
 }

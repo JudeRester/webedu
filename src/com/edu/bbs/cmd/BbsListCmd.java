@@ -15,16 +15,31 @@ public class BbsListCmd implements BCommand {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		int currpage=0;
-		if(request.getParameter("currpage")==null || request.getParameter("currpage")=="") {
+		int totalrec = 0;
+		String col = request.getParameter("col");
+		String keyword = request.getParameter("keyword");
+		PageCriteria pc;
+		ArrayList<BbsDTO> alist;
+		BbsDAO bbsdao = BbsDAOimpl.getInstance();
+		if(request.getParameter("currpage")==null || request.getParameter("currpage")==" ") {
 			currpage=1;
 		}else {
 			currpage = Integer.parseInt(request.getParameter("currpage"));
 		}
-		BbsDAO bbsdao = BbsDAOimpl.getInstance();
-		int totalrec = bbsdao.totalrec();
-		PageCriteria pc = new PageCriteria(currpage, totalrec);
-		ArrayList<BbsDTO> alist = bbsdao.list(pc.getStartrec(),pc.getLastrec());
-		request.setAttribute("list", alist);
-		request.setAttribute("pc", pc);
+		if(col == null || keyword.trim().equals(""))  {
+			totalrec = bbsdao.totalrec();
+			pc= new PageCriteria(currpage, totalrec);
+			alist = bbsdao.list(pc.getStartrec(),pc.getLastrec());
+			request.setAttribute("list", alist);
+			request.setAttribute("pc", pc);
+		}else {
+			totalrec = bbsdao.totalrec(col, "%"+keyword+"%");
+			pc = new PageCriteria(currpage, totalrec);
+			alist = bbsdao.list(pc.getStartrec(), pc.getLastrec(), "%"+keyword+"%", col);
+			request.setAttribute("list", alist);
+			request.setAttribute("pc", pc);
+			request.setAttribute("col", col);
+			request.setAttribute("keyword", keyword);
+		}
 	}
 }
